@@ -13,6 +13,8 @@ pipelines:
           inputResources:
             - name: source_code
         execution:
+          onStart:
+            - export JFROG_CLI_LOG_LEVEL=DEBUG
           onSuccess:
             - echo ${res_source_code_isGitTag}
             - appVersion=`if [[ ${res_source_code_isGitTag} == "True" ]]; then echo ${res_source_code_gitTagName}; else echo ${res_source_code_commitSha}; fi`
